@@ -12,6 +12,7 @@ namespace LemonadeStand_3DayStarter
         Player player;
         List<Day> days;
         int currentDay;
+        int totalDays;
 
         //constructor
         public Game()
@@ -28,15 +29,12 @@ namespace LemonadeStand_3DayStarter
         {            
             Day today = new Day();        //instatiate new day, generates weather
             currentDay++;                 //update number of day
-            DisplayWeather(today.weather);//diplayer todaysweather
-            DisplayDailyTotals(player);
+            DisplayWeather(today.weather);//display weather
+            DisplayDailyTotals(player);   //display starting day money and inventory
+            SetRecipe(player);            //RECIPE: set recipe of pitcher (lemons and sugar), set number of ice cubes in cut, set price of cup
+            DisplayRecipe(player);
 
-
-            
-
-            //generate weather and display it
-            //display opening of day, current money, day of the week
-            //RECIPE: set recipe of pitcher (lemons and sugar), set number of ice cubes in cut, set price of cup
+                        
             //PURCHASING: 
                 //display current inventory
                 //buy items subtracting from money and adding to inventory
@@ -48,9 +46,10 @@ namespace LemonadeStand_3DayStarter
         }
         public void WelcomeToDay()
         {
-            Console.WriteLine($"It is day {currentDay}. Here are your totals:");
+            Console.WriteLine($"It is day {currentDay}/{totalDays}. Here are your totals:");
         }
         public void DisplayWeather(Weather weather)
+
         {
             Console.WriteLine($"Today's weather is {weather.condition}/{weather.temperature} F");
         }
@@ -59,6 +58,29 @@ namespace LemonadeStand_3DayStarter
             Console.WriteLine($"{player.name} has: \n${player.wallet.Money} \n{player.inventory.lemons.Count} lemons " +
                 $"\n);{player.inventory.sugarCubes.Count} sugar cubes \n{player.inventory.iceCubes.Count} ice cubes " +
                 $"\n {player.inventory.cups.Count} paper cups");
+        }
+        public void SetRecipe(Player player)
+        {
+            Console.WriteLine("Would you like to adjust the recipe from yesterday? \nEnter 1 for yes \nEnter 2 for no");
+            string adjust = Console.ReadLine();
+            if(adjust == "1")
+            {
+                player.recipe.SetPricePerCup();
+                player.recipe.SetLemonsPerPitcher();
+                player.recipe.SetSugarPerPitcher();
+                player.recipe.SetIcePerCup();
+                DisplayRecipe(player);
+            }
+            else
+            {
+                Console.WriteLine("OK, let's keep it the same");
+                DisplayRecipe(player);
+            }
+        }
+        public void DisplayRecipe(Player player)
+        {
+            Console.WriteLine($"Your current recipe is: \n${player.recipe.pricePerCup} per cup \n{player.recipe.amountOfLemons} lemons per pitcher " +
+                $"\n{player.recipe.amountOfSugarCubes} sugar cubes per pitcher \n{player.recipe.amountOfIceCubes} per cup"));
         }
     }
 }
