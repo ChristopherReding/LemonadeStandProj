@@ -15,16 +15,22 @@ namespace LemonadeStand_3DayStarter
         //constructor
         public Day()
         {
-            Weather todaysWeather = new Weather();           
-
-            for (int i = 0; i < (100 + todaysWeather.FindConditionFactor() + todaysWeather.FindTempFactor()); i++)
+            this.weather = new Weather();
+            customers = new List<Customer>();
+            DetermineNumberOfCustomersThatDay();
+            
+        }
+        //member methods
+        public void DetermineNumberOfCustomersThatDay()
+        {
+            for (int i = 0; i < (100 + weather.todayConditionFactor); i++)
             {
                 Customer customer = new Customer();
                 customers.Add(customer);
             }
+            
+
         }
-        //member methods
-        
         
     }
 }

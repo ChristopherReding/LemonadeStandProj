@@ -11,8 +11,7 @@ namespace LemonadeStand_3DayStarter
         //member variables
         List<string> names;
         public string name;
-        public int conditionFactor;
-        public int tempFactor;
+        
         //constructor
         public Customer()
         {

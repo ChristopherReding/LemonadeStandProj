@@ -10,8 +10,10 @@ namespace LemonadeStand_3DayStarter
     {
         //member variables
         public string condition;
-        int temperature;
+        public int temperature;
         List<string> weatherConditions;
+        public int todayConditionFactor;
+        
 
         //constructor
         public Weather()
@@ -21,6 +23,8 @@ namespace LemonadeStand_3DayStarter
             weatherConditions.Add("Rainy");            
             condition = CreateWeatherCondition();            
             temperature = CreateTemp();
+            todayConditionFactor = FindConditionFactor() + FindTempFactor();
+
         }
         //member methods
         public string CreateWeatherCondition()
