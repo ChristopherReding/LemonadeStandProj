@@ -11,6 +11,7 @@ namespace LemonadeStand_3DayStarter
         //member variable
         Player player;
         List<Day> days;
+        Store store;
         int currentDay;
         int totalDays;
 
@@ -19,11 +20,15 @@ namespace LemonadeStand_3DayStarter
         {
             currentDay = 0;
                 
+
+
         }
         //member methods
         public void PlayGame()
         {
-            Player player = new Player();
+            this.player = new Player();
+            this.store = new Store();
+            
         }
         public void PlayADay(Player player)
         {            
@@ -31,17 +36,15 @@ namespace LemonadeStand_3DayStarter
             currentDay++;                 //update number of day
             DisplayWeather(today.weather);//display weather
             DisplayDailyTotals(player);   //display starting day money and inventory
-            SetRecipe(player);            //RECIPE: set recipe of pitcher (lemons and sugar), set number of ice cubes in cut, set price of cup
-            DisplayRecipe(player);
+            DisplayRecipe(player);        //display yesterdays recipe
+            SetRecipe(player);            //RECIPE: set recipe of pitcher (lemons and sugar), set number of ice cubes in cut, set price of cup, will display updated recipe if chosen to do so
+            PurchaseInventory(player);    //PURCHASING://buy items subtracting from money and adding to inventory
+            DisplayDailyTotals(player);   //updated inventory and cash before business day starts
 
-                        
-            //PURCHASING: 
-                //display current inventory
-                //buy items subtracting from money and adding to inventory
             //Simulation:
-                //run an amount of customers past the lemonade stand (that # based on weather). for loop might be nice
-                //bool whether each customer buys a cup or not (factors include weather, price)                    
-                //every 10 lemonades, make a pitcher provided ample supplies
+            //run an amount of customers past the lemonade stand (that # based on weather). for loop might be nice
+            //bool whether each customer buys a cup or not (factors include weather, price)                    
+            //every 10 lemonades, make a pitcher provided ample supplies
             //Display results of day (money made, cups sold, customers seen)
         }
         public void WelcomeToDay()
@@ -73,14 +76,20 @@ namespace LemonadeStand_3DayStarter
             }
             else
             {
-                Console.WriteLine("OK, let's keep it the same");
-                DisplayRecipe(player);
+                Console.WriteLine("OK, let's keep it the same");                
             }
         }
         public void DisplayRecipe(Player player)
         {
             Console.WriteLine($"Your current recipe is: \n${player.recipe.pricePerCup} per cup \n{player.recipe.amountOfLemons} lemons per pitcher " +
-                $"\n{player.recipe.amountOfSugarCubes} sugar cubes per pitcher \n{player.recipe.amountOfIceCubes} per cup"));
+                $"\n{player.recipe.amountOfSugarCubes} sugar cubes per pitcher \n{player.recipe.amountOfIceCubes} per cup");
+        }
+        public void PurchaseInventory(Player player)
+        {
+            store.SellCups(player);
+            store.SellLemons(player);
+            store.SellSugarCubes(player);
+            store.SellIceCubes(player);
         }
     }
 }
