@@ -27,69 +27,49 @@ namespace LemonadeStand_3DayStarter
         //member methods
         public void SetPricePerCup()
         {
-            Console.WriteLine("Set price for a cup of lemonade");
-            double userInput = Convert.ToDouble(Console.ReadLine());
-            if (userInput > 0 && userInput <= 1)
+            bool numIsValid = false;
+            double userInput = 0;
+            while (!numIsValid || userInput <= 0 || userInput > 1)
             {
-                pricePerCup = userInput;
+                Console.WriteLine("Set price for a cup of lemonade");
+                numIsValid = Double.TryParse(Console.ReadLine(), out userInput);
             }
-            else if (userInput <= 0)
-            {
-                Console.WriteLine("Are you mad? you gotta charge SOMETHING");
-                SetPricePerCup();
-            }
-            else if (userInput > 1)
-            {
-                Console.WriteLine("No way anyone's paying that much for a cup of lemonade");
-                SetPricePerCup();
-            }
-            else
-            {
-                Console.WriteLine("Please enter an appropriate price per cup");
-                SetPricePerCup();
-            }
+            pricePerCup = userInput;            
         }
+
         public void SetLemonsPerPitcher()
         {
-            Console.WriteLine("Set number of lemons per pitcher of lemonade");
-            int userInput = Convert.ToInt32(Console.ReadLine());
-            if (userInput >= 1)
+            bool numIsValid = false;
+            int userInput = 0;
+            while (!numIsValid || userInput < 2)
             {
-                amountOfLemons = userInput;
-            }            
-            else
-            {
-                Console.WriteLine("Please enter an appropriate number of lemons");
-                SetLemonsPerPitcher();
+                Console.WriteLine("Set number of lemons per pitcher of lemonade");
+                numIsValid = Int32.TryParse(Console.ReadLine(), out userInput);
             }
+            amountOfLemons = userInput;                       
+            
         }
         public void SetSugarPerPitcher()
         {
-            Console.WriteLine("Set number of sugar cubes per pitcher of lemonade");
-            int userInput = Convert.ToInt32(Console.ReadLine());
-            if (userInput >= 1)
+            bool numIsValid = false;
+            int userInput = 0;
+            while (!numIsValid || userInput < 2)
             {
-                amountOfSugarCubes = userInput;
+                Console.WriteLine("Set number of sugar cubes per pitcher of lemonade");
+                numIsValid = Int32.TryParse(Console.ReadLine(), out userInput);
             }
-            else
-            {
-                Console.WriteLine("Please enter an appropriate number of sugar cubes");
-                SetSugarPerPitcher();
-            }
+            amountOfSugarCubes = userInput;                        
         }
         public void SetIcePerCup()
         {
-            Console.WriteLine("Set number of ice cubes per cup of lemonade");
-            int userInput = Convert.ToInt32(Console.ReadLine());
-            if (userInput >= 1)
+            bool numIsValid = false;
+            int userInput = 0;
+            while (!numIsValid || userInput < 2)
             {
-                amountOfIceCubes = userInput;
+                Console.WriteLine("Set number of ice cubes per cup of lemonade");
+                numIsValid = Int32.TryParse(Console.ReadLine(), out userInput);
             }
-            else
-            {
-                Console.WriteLine("Please enter an appropriate number of ice cubes");
-                SetIcePerCup();
-            }
+            amountOfIceCubes = userInput;                        
         }
     }
 }

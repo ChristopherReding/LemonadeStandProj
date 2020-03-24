@@ -189,26 +189,16 @@ namespace LemonadeStand_3DayStarter
         }
         public int DetermineLengthOfGame()
         {
-            Console.WriteLine("How many days would you like to play? (enter a number from 7 to 30)");
-            int daysToPlay = Convert.ToInt32(Console.ReadLine());
-            if (daysToPlay <= 30 && daysToPlay >= 7)
+            bool numIsValid = false;
+            int daysToPlay = 0;
+            while (!numIsValid || daysToPlay < 7 || daysToPlay > 30)
             {
-                return daysToPlay;
+                Console.WriteLine("How many days would you like to play? (enter a number from 7 to 30)");
+                numIsValid = Int32.TryParse(Console.ReadLine(), out daysToPlay);            
+                 
             }
-            else if (daysToPlay < 7)
-            {
-                Console.WriteLine("Number is too small, we will play for 7 days");
-                return 7;
-            }
-            else if (daysToPlay > 30)
-            {
-                Console.WriteLine("Number is too large, we will play for 30 days");
-                return 30;
-            }
-            else
-            {
-                return 7;
-            }
+            return daysToPlay;
+            
         }
     }
 }
