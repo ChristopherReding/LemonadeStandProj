@@ -18,6 +18,7 @@ namespace LemonadeStand_3DayStarter
         //constructor
         public Weather()
         {
+            weatherConditions = new List<string>();
             weatherConditions.Add("Sunny");
             weatherConditions.Add("Cloudy");
             weatherConditions.Add("Rainy");            
@@ -30,7 +31,7 @@ namespace LemonadeStand_3DayStarter
         public string CreateWeatherCondition()
         {
             Random randomNumber = new Random();
-            int newRandomNumber = randomNumber.Next(weatherConditions.Count);
+            int newRandomNumber = randomNumber.Next(0, (weatherConditions.Count)-1);
             return weatherConditions[newRandomNumber];
         }
         public int CreateTemp()
@@ -64,7 +65,7 @@ namespace LemonadeStand_3DayStarter
             {
                 return -5;
             }
-            else if (70 <= temperature && temperature <= 70)
+            else if (70 <= temperature && temperature <= 79)
             {
                 return 0;
             }

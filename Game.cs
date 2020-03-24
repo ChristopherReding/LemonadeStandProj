@@ -70,14 +70,14 @@ namespace LemonadeStand_3DayStarter
         }
         public void DisplayDailyTotals(Player player)
         {
-            Console.WriteLine($"{player.name} has: \n${player.wallet.Money} \n{player.inventory.lemons.Count} lemons " +
-                $"\n);{player.inventory.sugarCubes.Count} sugar cubes \n{player.inventory.iceCubes.Count} ice cubes " +
-                $"\n {player.inventory.cups.Count} paper cups");
+            Console.WriteLine($"{player.name} has: \n${player.wallet.Money} \n{player.inventory.lemons.Count} lemons" +
+                $"\n{player.inventory.sugarCubes.Count} sugar cubes \n{player.inventory.iceCubes.Count} ice cubes " +
+                $"\n{player.inventory.cups.Count} paper cups\n");
         }
         public void DisplayEndOfDaySummary(Player player, Day today)
         {
             Console.WriteLine($"End of day {days.Count} summary: \n{player.name} sold {today.payingCustomers.Count} " +
-                $"cups of lemonade to a potential {today.customers.Count}");
+                $"cups of lemonade to a potential {today.customers.Count}\n");
                 
         }
         public void SetRecipe(Player player)
@@ -100,7 +100,7 @@ namespace LemonadeStand_3DayStarter
         public void DisplayRecipe(Player player)
         {
             Console.WriteLine($"Your current recipe is: \n${player.recipe.pricePerCup} per cup \n{player.recipe.amountOfLemons} lemons per pitcher " +
-                $"\n{player.recipe.amountOfSugarCubes} sugar cubes per pitcher \n{player.recipe.amountOfIceCubes} per cup");
+                $"\n{player.recipe.amountOfSugarCubes} sugar cubes per pitcher \n{player.recipe.amountOfIceCubes} per cup\n");
         }
         public void PurchaseInventory(Player player)
         {
