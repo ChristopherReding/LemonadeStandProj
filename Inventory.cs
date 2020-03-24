@@ -63,17 +63,15 @@ namespace LemonadeStand_3DayStarter
         public void RemoveLemonsFromInventory(int numberOfLemons)
         {
             for (int i = 0; i < numberOfLemons; i++)
-            {
-                Lemon lemon = new Lemon();
-                lemons.Remove(lemon);
+            {                
+                lemons.RemoveAt(0);
             }
         }
         public void RemoveSugarCubesFromInventory(int numberOfSugarCubes)
         {
             for (int i = 0; i < numberOfSugarCubes; i++)
             {
-                SugarCube sugarCube = new SugarCube();
-                sugarCubes.Remove(sugarCube);
+                sugarCubes.RemoveAt(0);
             }
         }
 
@@ -81,8 +79,7 @@ namespace LemonadeStand_3DayStarter
         {
             for (int i = 0; i < numberOfIceCubes; i++)
             {
-                IceCube iceCube = new IceCube();
-                iceCubes.Remove(iceCube);
+                iceCubes.RemoveAt(0);
             }
         }
 
@@ -90,8 +87,7 @@ namespace LemonadeStand_3DayStarter
         {
             for (int i = 0; i < numberOfCups; i++)
             {
-                Cup cup = new Cup();
-                cups.Remove(cup);
+                cups.RemoveAt(0);
             }
         }
     }

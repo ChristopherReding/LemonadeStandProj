@@ -28,8 +28,8 @@ namespace LemonadeStand_3DayStarter
             this.player = new Player();
             this.store = new Store();
             Console.WriteLine("Welcome to Lemonade Stand!");
-            int lengthOfGame = DetermineLengthOfGame();
-            for (int i = 0; i < lengthOfGame; i++)
+            totalDays = DetermineLengthOfGame();
+            for (int i = 0; i < totalDays; i++)
             {
                 PlayADay(player);
             }
@@ -54,9 +54,12 @@ namespace LemonadeStand_3DayStarter
             //run an amount of customers past the lemonade stand (that # based on weather). for loop might be nice
             //bool whether each customer buys a cup or not (factors include weather, price)                    
             //every 10 lemonades, make a pitcher provided ample supplies
+            if(player.inventory.iceCubes.Count > 0)
+            {
+                BurnIceDaily(player);
+            }
             DisplayEndOfDaySummary(player, today);//Display results of day (cups sold, customers seen)
-            
-            
+                       
             
         }
         public void WelcomeToDay()
@@ -94,7 +97,7 @@ namespace LemonadeStand_3DayStarter
             }
             else
             {
-                Console.WriteLine("OK, let's keep it the same");                
+                Console.WriteLine("OK, let's keep it the same\n");                
             }
         }
         public void DisplayRecipe(Player player)
@@ -173,10 +176,16 @@ namespace LemonadeStand_3DayStarter
         }
         public void RunDaysTransactions(Player player, Day today, int likelihoodToBuyFactor)
         {
+            
             for (int i = 0; i < today.customers.Count; i++)
             {
                 player.pitcher.MakeNewPitcher(player);
-                if (BuyLemonade(likelihoodToBuyFactor) == true && player.pitcher.cupsLeftinPitcher > 0)
+                if (player.pitcher.cupsLeftinPitcher <= 0 || player.inventory.cups.Count <= 0 || 
+                    player.inventory.iceCubes.Count < player.recipe.amountOfIceCubes)
+                {
+                    break;
+                }
+                else if (BuyLemonade(likelihoodToBuyFactor) == true)
                 {
                     Customer payingCustomer = new Customer();
                     today.payingCustomers.Add(payingCustomer);
@@ -199,6 +208,11 @@ namespace LemonadeStand_3DayStarter
             }
             return daysToPlay;
             
+        }
+        public void BurnIceDaily(Player player)
+        {
+            Console.WriteLine("The rest of your ice has melted");
+            player.inventory.RemoveIceCubesFromInventory(player.inventory.iceCubes.Count);
         }
     }
 }
