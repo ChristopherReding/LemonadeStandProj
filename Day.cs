@@ -11,6 +11,8 @@ namespace LemonadeStand_3DayStarter
         //member variables
         public Weather weather;
         public List<Customer> customers;
+        public List<Customer> payingCustomers;
+        
 
         //constructor
         public Day()
@@ -18,6 +20,7 @@ namespace LemonadeStand_3DayStarter
             this.weather = new Weather();
             customers = new List<Customer>();
             DetermineNumberOfCustomersThatDay();
+            payingCustomers = new List<Customer>();
             
         }
         //member methods
