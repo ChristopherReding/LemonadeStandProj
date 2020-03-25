@@ -13,11 +13,12 @@ namespace LemonadeStand_3DayStarter
         public int temperature;
         List<string> weatherConditions;
         public int todayConditionFactor;
-        
+        Random randomNumber;
 
         //constructor
         public Weather()
         {
+            Random randomNumber = new Random();
             weatherConditions = new List<string>();
             weatherConditions.Add("Sunny");
             weatherConditions.Add("Cloudy");
@@ -29,14 +30,12 @@ namespace LemonadeStand_3DayStarter
         }
         //member methods
         public string CreateWeatherCondition()
-        {
-            Random randomNumber = new Random();
+        {            
             int newRandomNumber = randomNumber.Next(0, (weatherConditions.Count)-1);
             return weatherConditions[newRandomNumber];
         }
         public int CreateTemp()
-        {
-            Random randomNumber = new Random();
+        {            
             int todaysTemp = randomNumber.Next(50,99);
             return todaysTemp;
         }

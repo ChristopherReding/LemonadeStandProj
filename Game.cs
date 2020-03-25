@@ -14,13 +14,13 @@ namespace LemonadeStand_3DayStarter
         Store store;
         int currentDay;
         int totalDays;
-        
+        Random randomNumber;
 
         //constructor
         public Game()
         {
-            currentDay = 0;              
-            
+            currentDay = 0;
+            randomNumber = new Random();
         }
         //member methods
         public void PlayGame()
@@ -155,8 +155,7 @@ namespace LemonadeStand_3DayStarter
             return (priceFactor + today.weather.todayConditionFactor);
         }
         public bool BuyLemonade(int likelihoodToBuyFactor)
-        {
-            Random randomNumber = new Random();
+        {           
             int newRndmNum = randomNumber.Next(1, 100);
             if (newRndmNum < 50 + likelihoodToBuyFactor)
             {
