@@ -18,7 +18,7 @@ namespace LemonadeStand_3DayStarter
         //constructor
         public Weather()
         {
-            Random randomNumber = new Random();
+            randomNumber = new Random();
             weatherConditions = new List<string>();
             weatherConditions.Add("Sunny");
             weatherConditions.Add("Cloudy");
@@ -31,7 +31,7 @@ namespace LemonadeStand_3DayStarter
         //member methods
         public string CreateWeatherCondition()
         {            
-            int newRandomNumber = randomNumber.Next(0, (weatherConditions.Count)-1);
+            int newRandomNumber = randomNumber.Next(0, (weatherConditions.Count));
             return weatherConditions[newRandomNumber];
         }
         public int CreateTemp()

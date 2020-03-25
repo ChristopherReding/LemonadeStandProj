@@ -9,14 +9,15 @@ namespace LemonadeStand_3DayStarter
     class Customer
     {
         //member variables
-        List<string> names;
-        public string name;
         
+        public int frugalityFactor;
+        Random randomNumber;
 
         //constructor
         public Customer()
         {
-            
+            randomNumber = new Random();
+            frugalityFactor = randomNumber.Next(-5, 6);            
         }
         //member methods
         

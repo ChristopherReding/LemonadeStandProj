@@ -12,21 +12,20 @@ namespace LemonadeStand_3DayStarter
         Player player;
         List<Day> days;
         Store store;
-        int currentDay;
         int totalDays;
         Random randomNumber;
 
         //constructor
         public Game()
         {
-            currentDay = 0;
             randomNumber = new Random();
+            days = new List<Day>();
         }
         //member methods
         public void PlayGame()
         {
-            this.player = new Player();
-            this.store = new Store();
+            player = new Player();
+            store = new Store();
             Console.WriteLine("Welcome to Lemonade Stand!");
             totalDays = DetermineLengthOfGame();
             for (int i = 0; i < totalDays; i++)
@@ -38,30 +37,27 @@ namespace LemonadeStand_3DayStarter
         }
         public void PlayADay(Player player)
         {            
-            Day today = new Day();        //instatiate new day, generates weather
-            currentDay++;                 //update number of day
-            DisplayWeather(today.weather);//display weather
-            DisplayDailyTotals(player);   //display starting day money and inventory
-            DisplayRecipe(player);        //display yesterdays recipe
-            SetRecipe(player);            //RECIPE: set recipe of pitcher (lemons and sugar), set number of ice cubes in cut, set price of cup, will display updated recipe if chosen to do so
-            PurchaseInventory(player);    //PURCHASING://buy items subtracting from money and adding to inventory
-            DisplayDailyTotals(player);   //updated inventory and cash before business day starts
+            Day today = new Day();        
+            days.Add(today);
+            DisplayWeather(today.weather);
+            DisplayDailyTotals(player);   
+            DisplayRecipe(player);        
+            SetRecipe(player);            
+            PurchaseInventory(player);    
+            DisplayDailyTotals(player);   
             int likelihoodToBuyFactor = FindLikelihoodToBuyFactor(player, today);
-            RunDaysTransactions(player, today, likelihoodToBuyFactor); //Simulation: run an amount of customers past the lemonade stand (that # based on weather). for loop might be nice //bool whether each customer buys a cup or not (factors include weather, price) every 10 lemonades, make a pitcher provided ample supplies
-            DisplayEndOfDaySummary(player, today);//Display results of day (cups sold, customers seen)
+            RunDaysTransactions(player, today, likelihoodToBuyFactor);  
+            DisplayEndOfDaySummary(player, today);
             BurnIceDaily(player);
             Console.WriteLine("Press enter to continue");
             Console.ReadLine();
             
         }
-        public void WelcomeToDay()
-        {
-            Console.WriteLine($"It is day {currentDay}/{totalDays}. Here are your totals:");
-        }
+        
         public void DisplayWeather(Weather weather)
 
         {
-            Console.WriteLine($"Day {currentDay}: \nToday's weather is {weather.condition}/{weather.temperature} F\n");
+            Console.WriteLine($"Day {days.Count}: \nToday's weather is {weather.condition}/{weather.temperature} F\n");
         }
         public void DisplayDailyTotals(Player player)
         {
@@ -71,7 +67,7 @@ namespace LemonadeStand_3DayStarter
         }
         public void DisplayEndOfDaySummary(Player player, Day today)
         {
-            Console.WriteLine($"End of day {currentDay}/{totalDays} summary: \n{player.name} sold {today.payingCustomers.Count} " +
+            Console.WriteLine($"End of day {days.Count}/{totalDays} summary: \n{player.name} sold {today.payingCustomers.Count} " +
                 $"cups of lemonade to a potential {today.customers.Count} customers\n");
                 
         }
@@ -177,7 +173,7 @@ namespace LemonadeStand_3DayStarter
                 {
                     break;
                 }
-                else if (BuyLemonade(likelihoodToBuyFactor) == true)
+                else if (BuyLemonade(likelihoodToBuyFactor + today.customers[i].frugalityFactor) == true)
                 {
                     Customer payingCustomer = new Customer();
                     today.payingCustomers.Add(payingCustomer);

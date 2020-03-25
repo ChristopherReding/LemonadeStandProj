@@ -18,13 +18,12 @@ namespace LemonadeStand_3DayStarter
         public Day()
         {
             this.weather = new Weather();
-            customers = new List<Customer>();
-            DetermineNumberOfCustomersThatDay();
+            customers = new List<Customer>();            
             payingCustomers = new List<Customer>();
-            
+            CreateCustomersForThatDay();
         }
         //member methods
-        public void DetermineNumberOfCustomersThatDay()
+        public void CreateCustomersForThatDay()
         {
             for (int i = 0; i < (100 + weather.todayConditionFactor); i++)
             {
