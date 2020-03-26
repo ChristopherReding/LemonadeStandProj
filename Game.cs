@@ -9,7 +9,7 @@ namespace LemonadeStand_3DayStarter
     class Game
     {
         //member variable
-        Player player;
+        Player playerOne;
         List<Day> days;
         Store store;
         int totalDays;
@@ -24,22 +24,24 @@ namespace LemonadeStand_3DayStarter
         //member methods
         public void PlayGame()
         {
-            player = new Player();
-            store = new Store();
             Console.WriteLine("Welcome to Lemonade Stand!");
             totalDays = DetermineLengthOfGame();
+            store = new Store();            
+            playerOne = new Player();
+            playerOne.name = "Player One";
             for (int i = 0; i < totalDays; i++)
-            {
-                PlayADay(player);
+            {                    
+                Day today = new Day();
+                days.Add(today);
+                DisplayWeather(today.weather);
+                PlayADay(playerOne, today);                    
             }
-            Console.WriteLine($"Game Over! \nAfter {totalDays} days, you made ${player.wallet.Money} \n" +
-                $"Thanks for playing!");
+                Console.WriteLine($"Game Over! \nAfter {totalDays} days, you made ${playerOne.wallet.Money} \n" +
+                    $"Thanks for playing!");               
+                    
         }
-        public void PlayADay(Player player)
+        public void PlayADay(Player player, Day today)
         {            
-            Day today = new Day();        
-            days.Add(today);
-            DisplayWeather(today.weather);
             DisplayDailyTotals(player);   
             DisplayRecipe(player);        
             SetRecipe(player);            
@@ -90,7 +92,7 @@ namespace LemonadeStand_3DayStarter
         }
         public void DisplayRecipe(Player player)
         {
-            Console.WriteLine($"Your current recipe is: \n${player.recipe.pricePerCup} per cup \n{player.recipe.amountOfLemons} lemons per pitcher " +
+            Console.WriteLine($"{player.name}'s current recipe is: \n${player.recipe.pricePerCup} per cup \n{player.recipe.amountOfLemons} lemons per pitcher " +
                 $"\n{player.recipe.amountOfSugarCubes} sugar cubes per pitcher \n{player.recipe.amountOfIceCubes} ice cubes per cup\n");
         }
         public void PurchaseInventory(Player player)
